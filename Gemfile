@@ -11,9 +11,8 @@ gem 'uglifier'
 gem 'turbolinks'
 gem 'bootsnap', require: false
 gem 'jquery-rails'
+gem 'bootstrap'
 gem 'stripe'
-gem 'bootstrap-sass'
-# gem 'bootswatch-rails'
 
 group :development, :test do
   gem 'pry'

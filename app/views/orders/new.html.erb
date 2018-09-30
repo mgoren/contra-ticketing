@@ -1,0 +1,94 @@
+<section class="payment-form dark">
+  <div class="block-heading">
+    <h2>megaband admissions & t-shirts</h2>
+    <p>This is a benefit dance with the goal of raising money for the community grants fund. Please pay as much as you can, between $10 and $25 per admission.</p>
+  </div>
+  <form>
+    <div class="card-details">
+      <h3 class="title">Purchaser details:</h3>
+      <div class="row">
+        <div class="form-group col-sm-8">
+          <label for="name">Name</label>
+          <input id="name" type="text" class="form-control" aria-label="Name" aria-describedby="basic-addon1" required=true autofocus=true>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-8">
+          <label for="email">Email</label>
+          <input id="email" type="email" class="form-control" aria-label="Email" aria-describedby="basic-addon1" required=true>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-8">
+          <label for="phone">Phone</label>
+          <input id="phone" type="tel" class="form-control" aria-label="Phone" aria-describedby="basic-addon1" required=true>
+        </div>
+      </div>
+    </div>
+    <div class="products">
+      <h3 class="title">Select admissions and/or t-shirts:</h3>
+      <div class="item">
+        <p class="item-name">Megaband Admissions</p>
+        <div class="form-group">
+          <label for="cost-per-admission" class="item-description"> How much are you paying <em>per admission</em>? ($10-25)</label>
+          <span class="quantity">
+            <div class="input-group-prepend">
+              <span class="input-group-text">$</span>
+              <input type="number" name="cost-per-admission" id="cost-per-admission" min="10" max="25" value="25">
+            </div>
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="admission-quantity" class="item-description"> Select admissions quantity</label>
+          <span class="quantity"><input type="number" name="admission-quantity" id="admission-quantity" min="0" value="1"></span>
+        </div>
+      </div>
+      <hr>
+      <div class="item">
+        <p class="item-name">T-shirts</p>
+        <div class="form-group">
+          <label for="tshirt-quantity" class="item-description"> Select total number of t-shirts ($15 each)</label>
+          <span class="quantity"><input type="number" name="tshirt-quantity" id="tshirt-quantity" min="0" value="0"></span>
+        </div>
+        <div class="form-group">
+          <label for="tshirt-note" class="item-description"> Specify color and style for each shirt</label>
+          <p><textarea name="tshirt-note" rows="3"></textarea></p>
+        </div>
+      </div>
+      <div class="total alert alert-danger">Unable to display total without JavaScript. Be sure to check your input carefully!</div>
+      <div class="total hidden">
+        <p>Total $<span class="price" id="total">25</span></p>
+        <p class="small" id="total-admissions">Admissions: 1 at $25 each</p>
+        <p class="small" id="total-tshirts"></p>
+      </div>
+    </div>
+    <div class="card-details">
+      <h3 class="title">Credit Card Details</h3>
+      <div class="row">
+        <div class="form-group col-sm-7">
+          <label for="card-holder">Card Holder</label>
+          <input id="card-holder" type="text" class="form-control" placeholder="Card Holder" aria-label="Card Holder" aria-describedby="basic-addon1">
+        </div>
+        <div class="form-group col-sm-5">
+          <label for="">Expiration Date</label>
+          <div class="input-group expiration-date">
+            <input type="text" class="form-control" placeholder="MM" aria-label="MM" aria-describedby="basic-addon1">
+            <span class="date-separator">/</span>
+            <input type="text" class="form-control" placeholder="YY" aria-label="YY" aria-describedby="basic-addon1">
+          </div>
+        </div>
+        <div class="form-group col-sm-8">
+          <label for="card-number">Card Number</label>
+          <input id="card-number" type="text" class="form-control" placeholder="Card Number" aria-label="Card Holder" aria-describedby="basic-addon1">
+        </div>
+        <div class="form-group col-sm-4">
+          <label for="cvc">CVC</label>
+          <input id="cvc" type="text" class="form-control" placeholder="CVC" aria-label="Card Holder" aria-describedby="basic-addon1">
+        </div>
+        <div class="form-group col-sm-12">
+          <button type="submit" class="btn btn-success btn-block">Purchase</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>
