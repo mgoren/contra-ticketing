@@ -121,11 +121,11 @@ textarea {
 	line-height: 1;
 }
 
-.payment-form .card-details{
+.payment-form .details{
 	padding: 25px 25px 15px;
 }
 
-.payment-form .card-details label{
+.payment-form .details label{
 	font-size: 12px;
 	font-weight: 600;
 	margin-bottom: 15px;
@@ -133,7 +133,7 @@ textarea {
 	text-transform: uppercase;
 }
 
-.payment-form .card-details button{
+.payment-form .details button{
 	margin-top: 0.6em;
 	padding:12px 0;
 	font-weight: 600;
@@ -154,6 +154,36 @@ textarea {
   margin-top: 20px;
 }
 
+#admission-cost {
+  margin-left: -5px;
+}
+
+.form-row {
+  padding: 20px;
+}
+
+.StripeElement {
+  background-color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+  border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
+}
+
 @media (min-width: 576px) {
 	.payment-form .title {
 		font-size: 1.2em;
@@ -171,23 +201,15 @@ textarea {
     	font-size: 1em;
 	}
 
-	.payment-form .card-details {
+	.payment-form .details {
   	padding: 40px 40px 30px;
   }
 
-	.payment-form .card-details button {
+	.payment-form .details button {
   	margin-top: 2em;
   }
 
   .welcome {
     max-width: 60%;
   }
-}
-
-#cost-per-admission {
-  margin-left: -5px;
-}
-
-.hidden {
-  display: none;
 }

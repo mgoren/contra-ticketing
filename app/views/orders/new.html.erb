@@ -3,25 +3,30 @@
     <h2>megaband admissions & t-shirts</h2>
     <p>This is a benefit dance with the goal of raising money for the community grants fund. Please pay as much as you can, between $10 and $25 per admission.</p>
   </div>
-  <form>
-    <div class="card-details">
-      <h3 class="title">Purchaser details:</h3>
+  <%= form_with model: @order, id: "payment-form" do |f| %>
+    <%= render '/layouts/errors', object: @order %>
+    <%= f.hidden_field :stripe_token %>
+    <%= f.hidden_field :total, id: 'total-as-displayed' %>
+    <%= f.hidden_field :idempotency_key, value: @idempotency_key %>
+
+    <div class="details">
+      <h3 class="title">Name and contact info:</h3>
       <div class="row">
         <div class="form-group col-sm-8">
-          <label for="name">Name</label>
-          <input id="name" type="text" class="form-control" aria-label="Name" aria-describedby="basic-addon1" required=true autofocus=true>
+          <%= f.label :name %>
+          <%= f.text_field :name, autofocus: true, required: true, class: 'form-control' %>
         </div>
       </div>
       <div class="row">
         <div class="form-group col-sm-8">
-          <label for="email">Email</label>
-          <input id="email" type="email" class="form-control" aria-label="Email" aria-describedby="basic-addon1" required=true>
+          <%= f.label :email %>
+          <%= f.email_field :email, required: true, class: 'form-control' %>
         </div>
       </div>
       <div class="row">
         <div class="form-group col-sm-8">
-          <label for="phone">Phone</label>
-          <input id="phone" type="tel" class="form-control" aria-label="Phone" aria-describedby="basic-addon1" required=true>
+          <%= f.label :phone %>
+          <%= f.telephone_field :phone, required: true, class: 'form-control' %>
         </div>
       </div>
     </div>
@@ -30,65 +35,56 @@
       <div class="item">
         <p class="item-name">Megaband Admissions</p>
         <div class="form-group">
-          <label for="cost-per-admission" class="item-description"> How much are you paying <em>per admission</em>? ($10-25)</label>
+          <%= f.label :admission_cost, 'How much are you paying per admission? ($10-25)', class: 'item-description' %>
           <span class="quantity">
             <div class="input-group-prepend">
               <span class="input-group-text">$</span>
-              <input type="number" name="cost-per-admission" id="cost-per-admission" min="10" max="25" value="25">
+              <%= f.number_field :admission_cost, id: 'admission-cost', min: 10, max: 25, step: 1, value: 25 %></span>
             </div>
           </span>
         </div>
         <div class="form-group">
-          <label for="admission-quantity" class="item-description"> Select admissions quantity</label>
-          <span class="quantity"><input type="number" name="admission-quantity" id="admission-quantity" min="0" value="1"></span>
+          <%= f.label :admission_quantity, 'Select admissions quantity', class: 'item-description' %>
+          <span class="quantity"><%= f.number_field :admission_quantity, id: 'admission-quantity', min: 0, step: 1, value: 1 %></span>
         </div>
       </div>
       <hr>
       <div class="item">
         <p class="item-name">T-shirts</p>
         <div class="form-group">
-          <label for="tshirt-quantity" class="item-description"> Select total number of t-shirts ($15 each)</label>
-          <span class="quantity"><input type="number" name="tshirt-quantity" id="tshirt-quantity" min="0" value="0"></span>
+          <%= f.label :tshirt_quantity, 'Select total number of t-shirts ($15 each)', class: 'item-description' %>
+          <span class="quantity"><%= f.number_field :tshirt_quantity, id: 'tshirt-quantity', min: 0, step: 1, value: 0 %></span>
         </div>
         <div class="form-group">
-          <label for="tshirt-note" class="item-description"> Specify color and style for each shirt</label>
-          <p><textarea name="tshirt-note" rows="3"></textarea></p>
+          <%= f.label :tshirt_note, 'Specify color and style for each shirt', class: 'item-description' %>
+          <%= f.text_area :tshirt_note, rows: 3 %>
         </div>
       </div>
-      <div class="total alert alert-danger">Unable to display total without JavaScript. Be sure to check your input carefully!</div>
-      <div class="total hidden">
-        <p>Total $<span class="price" id="total">25</span></p>
-        <p class="small" id="total-admissions">Admissions: 1 at $25 each</p>
+      <div class="total">
+        <p>Total $<span id="total-price"></span></p>
+        <p class="small" id="total-admissions"></p>
         <p class="small" id="total-tshirts"></p>
       </div>
     </div>
-    <div class="card-details">
-      <h3 class="title">Credit Card Details</h3>
-      <div class="row">
-        <div class="form-group col-sm-7">
-          <label for="card-holder">Card Holder</label>
-          <input id="card-holder" type="text" class="form-control" placeholder="Card Holder" aria-label="Card Holder" aria-describedby="basic-addon1">
+
+    <div class="details">
+      <h3 class="title">Payment info:</h3>
+      <p class="small">Card details are securely transmitted directly to Stripe, an industry-standard payment processor. We do not see or store your card details.</p>
+      <div class="form-row">
+        <label for="card-element">
+          Credit or debit card
+        </label>
+        <div id="card-element" class="form-control">
+          <!-- A Stripe Element will be inserted here. -->
         </div>
-        <div class="form-group col-sm-5">
-          <label for="">Expiration Date</label>
-          <div class="input-group expiration-date">
-            <input type="text" class="form-control" placeholder="MM" aria-label="MM" aria-describedby="basic-addon1">
-            <span class="date-separator">/</span>
-            <input type="text" class="form-control" placeholder="YY" aria-label="YY" aria-describedby="basic-addon1">
-          </div>
-        </div>
-        <div class="form-group col-sm-8">
-          <label for="card-number">Card Number</label>
-          <input id="card-number" type="text" class="form-control" placeholder="Card Number" aria-label="Card Holder" aria-describedby="basic-addon1">
-        </div>
-        <div class="form-group col-sm-4">
-          <label for="cvc">CVC</label>
-          <input id="cvc" type="text" class="form-control" placeholder="CVC" aria-label="Card Holder" aria-describedby="basic-addon1">
-        </div>
-        <div class="form-group col-sm-12">
-          <button type="submit" class="btn btn-success btn-block">Purchase</button>
-        </div>
+
+        <!-- Used to display Element errors. -->
+        <div id="card-errors" role="alert"></div>
       </div>
+
+      <button class="btn btn-success btn-block" id="payment-button">Submit Payment</button>
     </div>
-  </form>
+
+  <% end %>
+
 </section>

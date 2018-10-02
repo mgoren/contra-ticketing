@@ -21,9 +21,7 @@
 var pricePerTshirt = 15;
 
 $(function() {
-  $('.total').toggleClass('hidden');
-
-  $('#cost-per-admission').bind('change click', function() {
+  $('#admission-cost').bind('change click', function() {
     normalizeInput($(this));
     var pricePer = parseInt($(this).val());
     if (isNaN(pricePer) || pricePer > 25) {
@@ -33,6 +31,7 @@ $(function() {
     }
     updateTotal();
   });
+
   $('#admission-quantity, #tshirt-quantity').bind('change click', function() {
     normalizeInput($(this));
     var quantity = parseInt($(this).val());
@@ -48,11 +47,13 @@ var normalizeInput = function(selector) {
 }
 
 var updateTotal = function() {
-  var pricePer = parseInt($('#cost-per-admission').val());
+  var pricePer = parseInt($('#admission-cost').val());
   var quantity = parseInt($('#admission-quantity').val());
   var quantityTshirts = parseInt($('#tshirt-quantity').val());
   var total = pricePer * quantity + pricePerTshirt * quantityTshirts;
-  $('#total').text(total);
+
+  $('#total-price').text(total);
+  $('#total-as-displayed').val(total);
 
   if (quantity > 0) {
     $('#total-admissions').text("Admissions: " + quantity + " at $" + pricePer + " each");
@@ -65,3 +66,7 @@ var updateTotal = function() {
     $('#total-tshirts').text("");
   }
 }
+
+window.onload=window.onpageshow= function() {
+    updateTotal();
+};
