@@ -1,10 +1,10 @@
 class Order < ApplicationRecord
   validates :name, :email, :phone, :admission_quantity, :admission_cost, :tshirt_quantity, :tshirt_cost, presence: true
   validates :admission_cost, numericality: {only_integer: true, greater_than_or_equal_to: 10, less_than_or_equal_to: 25}
+  validates :name, :email, :phone, length: { maximum: 50 }
   validate :check_total
-  # validates_uniqueness_of :email
 
-  before_create :make_payment
+  before_save :make_payment
 
   attr_accessor :stripe_token, :idempotency_key
 private

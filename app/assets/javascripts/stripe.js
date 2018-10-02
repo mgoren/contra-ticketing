@@ -29,22 +29,30 @@ $(function() {
   });
 
   // Create a token or display an error when the form is submitted.
-  var form = document.getElementById('payment-form');
+  var form = document.getElementById('new_order');
+  var submitted = false;
+
   form.addEventListener('submit', function(event) {
     event.preventDefault();
+
+    if (submitted === false) {
+      submitted = true;
+      $('#payment-button').prop('disabled', true);
+      $('#payment-button').text('Validating...')
+    } else {
+      return;
+    }
 
     stripe.createToken(card).then(function(result) {
       if (result.error) {
         // Inform the customer that there was an error.
         var errorElement = document.getElementById('card-errors');
         errorElement.textContent = result.error.message;
+        submitted = false;
+        $('#payment-button').prop('disabled', false);
+        $('#payment-button').text('Submit Payment')
       } else {
-
-        // NOTE: MAYBE IMPROVE BELOW
-        // idempotency_key prevents multiple charges, but this helps appearance
-        $('#payment-button').prop('disabled', 'true');
         $('#payment-button').text('Processing...')
-
         // Send the token to your server.
         stripeTokenHandler(result.token);
       }
@@ -53,7 +61,7 @@ $(function() {
 
   function stripeTokenHandler(token) {
     // Insert the token ID into the form so it gets submitted to the server
-    var form = document.getElementById('payment-form');
+    var form = document.getElementById('new_order');
     $('input#order_stripe_token').val(token.id);
     form.submit();
   }

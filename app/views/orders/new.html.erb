@@ -3,7 +3,7 @@
     <h2>megaband admissions & t-shirts</h2>
     <p>This is a benefit dance with the goal of raising money for the community grants fund. Please pay as much as you can, between $10 and $25 per admission.</p>
   </div>
-  <%= form_with model: @order, id: "payment-form" do |f| %>
+  <%= form_for @order do |f| %>
     <%= render '/layouts/errors', object: @order %>
     <%= f.hidden_field :stripe_token %>
     <%= f.hidden_field :total, id: 'total-as-displayed' %>
@@ -39,13 +39,13 @@
           <span class="quantity">
             <div class="input-group-prepend">
               <span class="input-group-text">$</span>
-              <%= f.number_field :admission_cost, id: 'admission-cost', min: 10, max: 25, step: 1, value: 25 %></span>
+              <%= f.number_field :admission_cost, id: 'admission-cost', min: 10, max: 25, step: 1, value: @admission_cost %></span>
             </div>
           </span>
         </div>
         <div class="form-group">
           <%= f.label :admission_quantity, 'Select admissions quantity', class: 'item-description' %>
-          <span class="quantity"><%= f.number_field :admission_quantity, id: 'admission-quantity', min: 0, step: 1, value: 1 %></span>
+          <span class="quantity"><%= f.number_field :admission_quantity, id: 'admission-quantity', min: 0, step: 1, value: @admission_quantity %></span>
         </div>
       </div>
       <hr>
@@ -53,7 +53,7 @@
         <p class="item-name">T-shirts</p>
         <div class="form-group">
           <%= f.label :tshirt_quantity, 'Select total number of t-shirts ($15 each)', class: 'item-description' %>
-          <span class="quantity"><%= f.number_field :tshirt_quantity, id: 'tshirt-quantity', min: 0, step: 1, value: 0 %></span>
+          <span class="quantity"><%= f.number_field :tshirt_quantity, id: 'tshirt-quantity', min: 0, step: 1, value: @tshirt_quantity %></span>
         </div>
         <div class="form-group">
           <%= f.label :tshirt_note, 'Specify color and style for each shirt', class: 'item-description' %>
@@ -82,7 +82,7 @@
         <div id="card-errors" role="alert"></div>
       </div>
 
-      <button class="btn btn-success btn-block" id="payment-button">Submit Payment</button>
+      <%= f.submit 'Submit Payment', class: "btn btn-success btn-block", id: "payment-button" %>
     </div>
 
   <% end %>
