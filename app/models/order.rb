@@ -3,9 +3,10 @@ class Order < ApplicationRecord
   validates :admission_cost, numericality: {only_integer: true, greater_than_or_equal_to: 10, less_than_or_equal_to: 25}
   validates :name, :email, :phone, length: { maximum: 50 }
   validates :tshirt_note, length: { maximum: 255 }
+  validates :charge_id, uniqueness: true
   validate :check_total
 
-  before_save :make_payment
+  before_create :make_payment
 
   attr_accessor :stripe_token, :idempotency_key
 private
@@ -27,7 +28,12 @@ private
       }, {
         idempotency_key: idempotency_key
         })
-        self.charge_id = charge.id
+        if Order.find_by(charge_id: charge.id)
+          errors.add(:duplicate, 'Duplicate form submission blocked.')
+          throw :abort
+        else
+          self.charge_id = charge.id
+        end
     rescue Stripe::CardError => e
       errors.add(:custom, e.message)
       throw :abort

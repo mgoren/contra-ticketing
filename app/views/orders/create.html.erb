@@ -1,1 +1,22 @@
-<h2>Thanks, you paid <strong>$<%= @order.total %></strong>!</h2>
+<section class="thanks">
+  <div class="block-heading">
+    <h2>Thanks <%= @order.name %>!</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-12 thanks">
+      <p><strong>You paid $<%= @order.total %> for the following:</strong></p>
+      <p>
+        <% if @order.admission_quantity > 0 %>
+          Megaband admissions: <%= @order.admission_quantity %><br>
+        <% end %>
+        <% if @order.tshirt_quantity > 0 %>
+            t-shirts: <%= @order.tshirt_quantity %><br>
+            t-shirt details: <%= @order.tshirt_note %>
+        <% end %>
+      </p>
+      <hr>
+      <p><strong>Your name will be on a list at the door.</strong></p>
+      <p>Please email <a href="mailto:contra@portlandcountrydance.org">contra@portlandcountrydance.org</a> if you have any questions.</p>
+    </div>
+  </div>
+</div>

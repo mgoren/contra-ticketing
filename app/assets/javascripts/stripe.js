@@ -1,5 +1,5 @@
 $(function() {
-  if( $("body").hasClass('orders') && $("body").hasClass('new') ) {
+  if( $("body").hasClass('orders') ) {
     // Create a Stripe client
     var stripe = Stripe('pk_test_s37XBfVqAW9ZQKy0GVNNfsrI');
     var elements = stripe.elements();

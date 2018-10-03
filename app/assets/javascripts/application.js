@@ -16,3 +16,7 @@
 //= require rails-ujs
 //= require activestorage
 //= require_tree .
+
+$(function() {
+  $('.continue').toggleClass('d-none')
+});
