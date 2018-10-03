@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   </head>
 
-  <body>
+  <body class="<%= controller_name %> <%= action_name %>">
     <%= flash_notice(flash) do %>
       <%= sanitize(flash[:notice]) %>
       <%= sanitize(flash[:alert]) %>

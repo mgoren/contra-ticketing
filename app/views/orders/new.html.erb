@@ -14,19 +14,19 @@
       <div class="row">
         <div class="form-group col-sm-8">
           <%= f.label :name %>
-          <%= f.text_field :name, autofocus: true, required: true, class: 'form-control' %>
+          <%= f.text_field :name, autofocus: true, required: true, maxlength: 50, class: 'form-control' %>
         </div>
       </div>
       <div class="row">
         <div class="form-group col-sm-8">
           <%= f.label :email %>
-          <%= f.email_field :email, required: true, class: 'form-control' %>
+          <%= f.email_field :email, required: true, maxlength: 50, class: 'form-control' %>
         </div>
       </div>
       <div class="row">
         <div class="form-group col-sm-8">
           <%= f.label :phone %>
-          <%= f.telephone_field :phone, required: true, class: 'form-control' %>
+          <%= f.telephone_field :phone, required: true, maxlength: 50, class: 'form-control' %>
         </div>
       </div>
     </div>
@@ -57,7 +57,7 @@
         </div>
         <div class="form-group">
           <%= f.label :tshirt_note, 'Specify color and style for each shirt', class: 'item-description' %>
-          <%= f.text_area :tshirt_note, rows: 3 %>
+          <%= f.text_area :tshirt_note, maxlength: 255, rows: 3 %>
         </div>
       </div>
       <div class="total">
