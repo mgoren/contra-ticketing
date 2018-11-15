@@ -12,11 +12,23 @@ $(function() {
     updateTotal();
   });
 
-  $('#admission-quantity, #tshirt-quantity').bind('change click', function() {
+  $('#admission-quantity').bind('change click', function() {
     normalizeInput($(this));
     var quantity = parseInt($(this).val());
     if (isNaN(quantity) || quantity < 0) {
       $(this).val("0");
+    }
+    updateTotal();
+  });
+
+  $('#tshirt-quantity').bind('change click', function() {
+    normalizeInput($(this));
+    var quantity = parseInt($(this).val());
+    if (isNaN(quantity) || quantity <= 0) {
+      $(this).val("0");
+      $('#tshirt-note').addClass('d-none');
+    } else {
+      $('#tshirt-note').removeClass('d-none');
     }
     updateTotal();
   });

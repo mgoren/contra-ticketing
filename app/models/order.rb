@@ -6,10 +6,15 @@ class Order < ApplicationRecord
   validates :charge_id, uniqueness: true
   validate :check_total
 
+  before_create :clear_note, if: ->(order) { order.tshirt_quantity == 0 }
   before_create :make_payment
 
   attr_accessor :stripe_token, :idempotency_key
 private
+
+  def clear_note
+    self.tshirt_note = nil
+  end
 
   def check_total
     unless total == admission_quantity * admission_cost + tshirt_quantity * tshirt_cost
