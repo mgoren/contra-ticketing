@@ -18,5 +18,6 @@
 //= require_tree .
 
 $(function() {
+  $('.continue').hide();
   // $('.continue').toggleClass('d-none')
 });
