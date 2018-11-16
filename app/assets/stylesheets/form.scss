@@ -184,3 +184,13 @@
     }
   }
 }
+
+@media (max-width: 575px) {
+	#admission-cost-group {
+		padding-top: 1em;
+	}
+
+	#admission-quantity-group {
+		padding-top: 4em;
+	}
+}

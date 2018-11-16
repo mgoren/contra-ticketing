@@ -34,8 +34,8 @@
       <h3 class="title">Select admissions and/or t-shirts:</h3>
       <div class="item">
         <p class="item-name">Megaband Admissions</p>
-        <div class="form-group">
-          <%= f.label :admission_cost, 'How much are you paying per admission? ($10-25)', class: 'item-description' %>
+        <div class="form-group" id="admission-cost-group">
+          <%= f.label :admission_cost, 'How much are you able to pay per admission? ($10-25)', class: 'item-description' %>
           <span class="quantity">
             <div class="input-group-prepend">
               <span class="input-group-text">$</span>
@@ -43,7 +43,7 @@
             </div>
           </span>
         </div>
-        <div class="form-group">
+        <div class="form-group" id="admission-quantity-group">
           <%= f.label :admission_quantity, 'Select admissions quantity', class: 'item-description' %>
           <span class="quantity"><%= f.number_field :admission_quantity, id: 'admission-quantity', min: 0, step: 1, value: @admission_quantity %></span>
         </div>
