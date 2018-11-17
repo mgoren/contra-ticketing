@@ -33,6 +33,7 @@
         </div>
       </div>
     </div>
+
     <div class="products">
       <h3 class="title">Select admissions and/or t-shirts:</h3>
       <div class="item">
@@ -42,7 +43,7 @@
           <span class="quantity">
             <div class="input-group-prepend">
               <span class="input-group-text">$</span>
-              <%= f.number_field :admission_cost, id: 'admission-cost', min: 10, max: 25, step: 1, value: @admission_cost %></span>
+              <%= f.number_field :admission_cost, id: 'admission-cost', min: 10, max: 25, step: 1, value: @admission_cost %>
             </div>
           </span>
         </div>
@@ -55,7 +56,7 @@
       <div class="item">
         <p class="item-name">T-shirts</p>
         <div class="form-group">
-          <p class="small"><a href="#" target=_blank>Click here for t-shirt style & size guide</a> (opens in new tab)</p>
+          <p class="small"><a href="/tshirts" target=_blank>Click here for t-shirt style & size guide</a> (opens in new tab)</p>
           <%= f.label :tshirt_quantity, 'Select total number of t-shirts ($15 each)', class: 'item-description' %>
           <span class="quantity"><%= f.number_field :tshirt_quantity, id: 'tshirt-quantity', min: 0, step: 1, value: @tshirt_quantity %></span>
         </div>
@@ -81,14 +82,11 @@
         <div id="card-element" class="form-control">
           <!-- A Stripe Element will be inserted here. -->
         </div>
-
         <!-- Used to display Element errors. -->
         <div id="card-errors" role="alert"></div>
       </div>
-
       <%= f.submit 'Submit Payment', class: "btn btn-success btn-block", id: "payment-button" %>
     </div>
 
   <% end %>
-
 </section>

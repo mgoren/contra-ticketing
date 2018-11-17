@@ -32,3 +32,56 @@ body {
     max-width: 85%;
   }
 }
+
+.card {
+  background-color: #FFF5E6;
+  padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.swatch img {
+  margin: 10px;
+}
+
+.swatch figcaption {
+  text-align: center;
+  font-size: 0.75em;
+}
+
+#swatches {
+  padding: 20px;
+}
+
+#swatches p {
+  text-align: center;
+}
+
+#swatches .row {
+  margin: auto;
+}
+
+#design {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#design figcaption {
+  font-size: 0.85em;
+}
+
+#warning {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  color: red;
+  font-weight: bold;
+}
+
+#size-warning {
+  color: red;
+  font-weight: bold;
+}
