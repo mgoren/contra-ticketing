@@ -13,6 +13,7 @@ gem 'bootsnap', require: false
 gem 'jquery-rails'
 gem 'bootstrap'
 gem 'stripe'
+gem 'rest-client'
 
 group :development, :test do
   gem 'pry'
