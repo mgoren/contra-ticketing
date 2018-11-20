@@ -4,19 +4,25 @@
   </div>
   <div class="row">
     <div class="col-md-12 thanks">
-      <p><strong>You paid $<%= @order.total %> for the following:</strong></p>
+      <p>Your payment to PCDC for $<%= @order.total %> has been successfully processed.</p>
+      <% if @order.admission_quantity > 0 %>
+        <p>
+          Megaband admissions:<br>
+          <%= @order.admission_quantity %> x $<%= @order.admission_cost %> = $<%= @order.admission_quantity * @order.admission_cost %><br>
+          <strong>You will not receive a physical ticket; your name will be on a list at the door.</strong>
+        </p>
+      <% end %>
+      <% if @order.tshirt_quantity > 0 %>
+        <p>
+          Megaband t-shirts:<br>
+          <%= @order.tshirt_quantity %> x $<%= @order.tshirt_cost %> = $<%= @order.tshirt_quantity * @order.tshirt_cost %><br>
+          <%= @order.tshirt_note %>
+        </p>
+      <% end %>
       <p>
-        <% if @order.admission_quantity > 0 %>
-          Megaband admissions: <%= @order.admission_quantity %><br>
-        <% end %>
-        <% if @order.tshirt_quantity > 0 %>
-            t-shirts: <%= @order.tshirt_quantity %><br>
-            t-shirt details: <%= @order.tshirt_note %>
-        <% end %>
+        A receipt has been sent to <%= @order.email %>.<br>
+        Please email <a href="mailto:contra@portlandcountrydance.org">contra@portlandcountrydance.org</a> if you have any questions.
       </p>
-      <hr>
-      <p><strong>You will not receive a physical ticket; your name will be on a list at the door.</strong></p>
-      <p>Please email <a href="mailto:contra@portlandcountrydance.org">contra@portlandcountrydance.org</a> if you have any questions.</p>
     </div>
   </div>
 </section>

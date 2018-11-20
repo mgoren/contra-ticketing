@@ -66,8 +66,8 @@ private
       body_html += "<strong>Your name will be on a list at the door. (You will not receive a physical ticket.)</strong></p>"
     end
     if tshirt_quantity > 0
-      body_text += "T-shirts: #{tshirt_quantity} x $#{tshirt_cost} = $#{tshirt_quantity * tshirt_cost} "
-      body_html += "<p>T-shirts:<br>#{tshirt_quantity} x $#{tshirt_cost} = $#{tshirt_quantity * tshirt_cost}<br>#{tshirt_note}</p>"
+      body_text += "Megaband t-shirts: #{tshirt_quantity} x $#{tshirt_cost} = $#{tshirt_quantity * tshirt_cost} "
+      body_html += "<p>Megaband t-shirts:<br>#{tshirt_quantity} x $#{tshirt_cost} = $#{tshirt_quantity * tshirt_cost}<br>#{tshirt_note}</p>"
     end
     body_text += "Please email contra@portlandcountrydance.org if you have any questions."
     body_html += "<p>Please email contra@portlandcountrydance.org if you have any questions.</p>"
