@@ -8,6 +8,7 @@ class Order < ApplicationRecord
 
   before_create :clear_note, if: ->(order) { order.tshirt_quantity == 0 }
   before_create :make_payment
+  after_create :send_webhook
   after_create :send_email_receipt
 
   attr_accessor :stripe_token, :idempotency_key
@@ -44,6 +45,10 @@ private
       errors.add(:custom, e.message)
       throw :abort
     end
+  end
+
+  def send_webhook
+    Webhook.new(self)
   end
 
   def send_email_receipt

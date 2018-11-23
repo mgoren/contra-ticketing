@@ -14,6 +14,7 @@ gem 'jquery-rails'
 gem 'bootstrap'
 gem 'stripe'
 gem 'rest-client'
+gem 'resque'
 
 group :development, :test do
   gem 'pry'
