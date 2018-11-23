@@ -1,24 +1,15 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Simple open-source app to sell contra dance tickets via Stripe
 
-Things you may want to cover:
+* Sends email receipt
+* Sends webhook to Zapier for logging of transactions in a Google spreadsheet
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+.env should include:
+```shell
+PUBLISHABLE_KEY=stripe_publishable_key
+SECRET_KEY=stripe_secret_key
+MAILGUN_API_KEY=mailgun_api_key
+MAILGUN_DOMAIN=domain
+ZAPIER_WEBHOOK_URL=webhook_for_zapier_script_to_log_order_in_spreadsheet
+```
