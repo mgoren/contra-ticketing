@@ -1,0 +1,80 @@
+var pricePerAdmission = <%= Rails.configuration.order[:admission_cost] %>;
+if (pricePerAdmission === 0) {
+  var sliding_scale = true;
+  var sliding_scale_min = <%= Rails.configuration.order[:sliding_scale_min] %>;
+  var sliding_scale_max = <%= Rails.configuration.order[:sliding_scale_max] %>;
+}
+var tshirts_available = <%= Rails.configuration.order[:tshirts_available] %>;
+if (tshirts_available) {
+  var pricePerTshirt = <%= Rails.configuration.order[:tshirt_cost] %>;
+}
+
+$(function() {
+  if(sliding_scale) {
+    $('#admission-cost').bind('change click', function() {
+      normalizeInput($(this));
+      var pricePer = parseInt($(this).val());
+      if (isNaN(pricePer) || pricePer > sliding_scale_max) {
+        $(this).val(sliding_scale_max);
+      } else if (pricePer < sliding_scale_min) {
+        $(this).val(sliding_scale_min);
+      }
+      updateTotal();
+    });
+  }
+
+  $('#admission-quantity').bind('change click', function() {
+    normalizeInput($(this));
+    var quantity = parseInt($(this).val());
+    if (isNaN(quantity) || quantity < 0) {
+      $(this).val("0");
+    }
+    updateTotal();
+  });
+
+  if(tshirts_available) {
+    $('#tshirt-quantity').bind('change click', function() {
+      normalizeInput($(this));
+      var quantity = parseInt($(this).val());
+      if (isNaN(quantity) || quantity <= 0) {
+        $(this).val("0");
+        $('#tshirt-note').addClass('d-none');
+      } else {
+        $('#tshirt-note').removeClass('d-none');
+      }
+      updateTotal();
+    });
+  }
+});
+
+var normalizeInput = function(selector) {
+  selector.val(selector.val().split('.')[0]);
+}
+
+var updateTotal = function() {
+  var pricePer = sliding_scale ? parseInt($('#admission-cost').val()) : pricePerAdmission;
+  var quantity = parseInt($('#admission-quantity').val());
+  var total = pricePer * quantity;
+  if (tshirts_available) {
+    var quantityTshirts = parseInt($('#tshirt-quantity').val());
+    total += pricePerTshirt * quantityTshirts;
+  }
+
+  $('#total-price').text(total);
+  $('#total-as-displayed').val(total);
+
+  if (quantity > 0) {
+    $('#total-admissions').text("Admissions: " + quantity + " at $" + pricePer + " each");
+  } else {
+    $('#total-admissions').text("");
+  }
+  if (tshirts_available && quantityTshirts > 0) {
+    $('#total-tshirts').text("T-shirts: " + quantityTshirts + " at $" + pricePerTshirt + " each");
+  } else {
+    $('#total-tshirts').text("");
+  }
+}
+
+window.onload=window.onpageshow= function() {
+    updateTotal();
+};

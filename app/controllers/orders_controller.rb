@@ -27,6 +27,6 @@ class OrdersController < ApplicationController
 
 private
   def order_params
-    params.require(:order).permit(:name, :email, :phone, :total, :admission_cost, :admission_quantity, :tshirt_quantity, :tshirt_note, :stripe_token, :idempotency_key).merge(tshirt_cost: 15)
+    params.require(:order).permit(:name, :email, :phone, :total, :admission_cost, :admission_quantity, :tshirt_quantity, :tshirt_note, :stripe_token, :idempotency_key)
   end
 end

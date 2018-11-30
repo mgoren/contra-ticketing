@@ -1,4 +1,4 @@
-# README
+# Contra-Ticketing
 
 ## Simple open-source app to sell contra dance tickets via Stripe
 
