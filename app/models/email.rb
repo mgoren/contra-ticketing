@@ -28,6 +28,7 @@ class Email
     end
     body_text += "Please email contra@portlandcountrydance.org if you have any questions."
     body_html += "<p>Please email contra@portlandcountrydance.org if you have any questions.</p>"
+    body_html += "<p><a href='http://www.cascadepromenade.org'>Check out other Cascade Promenade events!</a></p>"
     RestClient.post url, from: from, to: order.email, subject: subject, text: body_text, html: body_html
   end
 end
