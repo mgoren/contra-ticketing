@@ -1,13 +1,12 @@
 class Webhook
-  attr_reader :payload
+  attr_reader :endpoint, :payload
 
-  def initialize(attributes)
-    @payload = attributes
-    WebhookJob.perform_later({ payload: payload })
+  def initialize
+    WebhookJob.perform_later({ endpoint: endpoint, payload: payload })
   end
 
   def self.send(attributes)
-    response = RestClient.post(ENV['ZAPIER_WEBHOOK_URL'], attributes[:payload].to_json)
+    response = RestClient.post(attributes[:endpoint], attributes[:payload].to_json)
     raise response.to_s if response.code >= 400
     response
   end

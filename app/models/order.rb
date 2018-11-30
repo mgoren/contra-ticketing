@@ -8,8 +8,8 @@ class Order < ApplicationRecord
 
   before_create :clear_note, if: ->(order) { order.tshirt_quantity == 0 }
   before_create :make_payment
-  after_create :send_webhook
-  after_create :send_email_receipt
+  after_create :send_spreadsheet_webhook
+  after_create :send_email
 
   attr_accessor :stripe_token, :idempotency_key
 private
@@ -47,35 +47,11 @@ private
     end
   end
 
-  def send_webhook
-    Webhook.new(self)
+  def send_spreadsheet_webhook
+    WebhookSpreadsheet.new(self)
   end
 
-  def send_email_receipt
-    url = "https://api:#{ENV['MAILGUN_API_KEY']}@api.mailgun.net/v3/#{ENV['MAILGUN_DOMAIN']}/messages"
-    from = "Portland Megaband <no-reply@#{ENV['MAILGUN_DOMAIN']}>"
-    subject = "Portland Megaband payment receipt"
-    body_text = "Thanks #{name}! Your payment to PCDC for $#{total} has been successfully processed. "
-    body_html = "<p>Thanks #{name}! Your payment to PCDC for $#{total} has been successfully processed.</p>"
-    body_html += "<p>Name: #{name}<br>Email: #{email}<br>Phone: #{phone}</p>"
-    if admission_quantity > 0
-      if admission_cost > 10
-        donation_amount = (admission_cost - 10) * admission_quantity
-        body_text += "Megaband admissions: #{admission_quantity} x $#{admission_cost} = $#{admission_quantity * admission_cost} (of which $#{donation_amount} is a tax-deductible charitable contribution to PCDC) "
-        body_html += "<p>Megaband admissions:<br>#{admission_quantity} x $#{admission_cost} = $#{admission_quantity * admission_cost} (of which $#{donation_amount} is a tax-deductible charitable contribution to PCDC)<br>"
-      else
-        body_text += "Megaband admissions: #{admission_quantity} x $#{admission_cost} = $#{admission_quantity * admission_cost} "
-        body_html += "<p>Megaband admissions:<br>#{admission_quantity} x $#{admission_cost} = $#{admission_quantity * admission_cost}<br>"
-      end
-      body_text += "Your name will be on a list at the door. (You will not receive a physical ticket.) "
-      body_html += "<strong>Your name will be on a list at the door. (You will not receive a physical ticket.)</strong></p>"
-    end
-    if tshirt_quantity > 0
-      body_text += "Megaband t-shirts: #{tshirt_quantity} x $#{tshirt_cost} = $#{tshirt_quantity * tshirt_cost} "
-      body_html += "<p>Megaband t-shirts:<br>#{tshirt_quantity} x $#{tshirt_cost} = $#{tshirt_quantity * tshirt_cost}<br>#{tshirt_note}</p>"
-    end
-    body_text += "Please email contra@portlandcountrydance.org if you have any questions."
-    body_html += "<p>Please email contra@portlandcountrydance.org if you have any questions.</p>"
-    RestClient.post url, from: from, to: email, subject: subject, text: body_text, html: body_html
+  def send_email
+    Email.new(self)
   end
 end
