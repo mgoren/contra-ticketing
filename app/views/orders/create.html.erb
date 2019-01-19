@@ -17,7 +17,7 @@
           Megaband t-shirts:<br>
           <%= @order.tshirt_quantity %> x $<%= @order.tshirt_cost %> = $<%= @order.tshirt_quantity * @order.tshirt_cost %><br>
           <%= @order.tshirt_note %><br>
-          T-shirts can be picked up at the dance.
+          <strong>T-shirts can be picked up at the dance.</strong>
         </p>
       <% end %>
       <p>
@@ -28,7 +28,7 @@
       </p>
       <p>Paid parking is available in the parking structure across Broadway from the building.</p>
       <p>
-        A receipt has been sent to <%= @order.email %>. Please check your spam folder if you do not see it.<br>
+        A receipt has been sent to <%= @order.email %>.<br>
         Please email <a href="mailto:contra@portlandcountrydance.org">contra@portlandcountrydance.org</a> if you have any questions.
       </p>
       <p><a href="http://www.cascadepromenade.org/dance/2019/01/06/Cascade-Promenade-2019.html">Check out other Cascade Promenade dances!</a></p>

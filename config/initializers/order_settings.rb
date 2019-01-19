@@ -7,5 +7,5 @@ Rails.configuration.order = {
   sliding_scale_min: 10, # optional: number or delete line if not sliding scale
   sliding_scale_max: 25, # optional: number or delete line if not sliding scale
   tshirts_available: true, # required: true or false
-  tshirt_cost: 15 # optional: number or delete line if not selling tshirts
+  tshirt_cost: 20 # optional: number or delete line if not selling tshirts
 }

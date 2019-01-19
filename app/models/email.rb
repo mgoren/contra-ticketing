@@ -27,8 +27,8 @@ class Email
       body_html += "<p>Megaband t-shirts:<br>#{order.tshirt_quantity} x $#{order.tshirt_cost} = $#{order.tshirt_quantity * order.tshirt_cost}<br>#{order.tshirt_note}<br>T-shirts can be picked up at the dance.</p>"
     end
     body_text += "Please email contra@portlandcountrydance.org if you have any questions."
-    body_html += "<p>Saturday, March 9, 2019<br>7:30 lesson | 8-11:15 dance<br>PSU Smith Memorial Center Ballroom, 3rd Floor<br>1825 SW Broadway, Portland, Oregon</p><br>"
-    body_html += "<p>Paid parking is available in the parking structure across Broadway from the building.</p><br>"
+    body_html += "<p>Saturday, March 9, 2019<br>7:30 lesson | 8-11:15 dance<br>PSU Smith Memorial Center Ballroom, 3rd Floor<br>1825 SW Broadway, Portland, Oregon</p>"
+    body_html += "<p>Paid parking is available in the parking structure across Broadway from the building.</p>"
     body_html += "<p>Please email contra@portlandcountrydance.org if you have any questions.</p>"
     body_html += "<p><a href='http://www.cascadepromenade.org/dance/2019/01/06/Cascade-Promenade-2019.html'>Check out other Cascade Promenade events!</a></p>"
     RestClient.post url, from: from, to: order.email, subject: subject, text: body_text, html: body_html

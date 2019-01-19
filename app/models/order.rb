@@ -9,7 +9,7 @@ class Order < ApplicationRecord
 
   before_create :make_payment
   after_create :add_to_spreadsheet
-  after_create :send_receipt
+  # after_create :send_receipt # now sending through zapier
 
   attr_accessor :stripe_token, :idempotency_key
 
