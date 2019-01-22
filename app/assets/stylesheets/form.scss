@@ -1,3 +1,7 @@
+.dark {
+	background-color: #f6f6f6;
+}
+
 .payment-form {
 	padding-bottom: 50px;
 
@@ -135,6 +139,10 @@
   }
 }
 
+.octicon-trashcan {
+	cursor: pointer;
+}
+
 .StripeElement {
   background-color: white;
   padding: 8px 12px;
@@ -155,6 +163,10 @@
 
 .StripeElement--webkit-autofill {
   background-color: #fefde5 !important;
+}
+
+#tshirt-select-group {
+	height: 180px;
 }
 
 @media (min-width: 576px) {

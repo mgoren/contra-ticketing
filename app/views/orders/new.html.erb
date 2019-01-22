@@ -1,4 +1,5 @@
 <section class="payment-form dark">
+  <div class="alert alert-danger text-center"><strong>testing only &mdash; site will go live soon</strong></div>
   <div class="block-heading">
     <h2><%= Rails.configuration.order[:order_form_title] %></h2>
     <p><%= Rails.configuration.order[:order_form_description] %></p>
@@ -18,8 +19,8 @@
   <%= form_for @order do |f| %>
     <%= render '/layouts/errors', object: @order %>
     <%= f.hidden_field :stripe_token %>
-    <%= f.hidden_field :total, id: 'total-as-displayed' %>
     <%= f.hidden_field :idempotency_key, value: @idempotency_key %>
+    <%= f.hidden_field :total, id: 'total-as-displayed' %>
 
     <div class="details">
       <h3 class="title">Name and contact info:</h3>
@@ -67,14 +68,18 @@
         <hr>
         <div class="item">
           <p class="item-name">T-shirts</p>
-          <div class="form-group">
-            <p class="small"><a href="/tshirts" target=_blank>Click here for t-shirt style & size guide</a> (opens in new tab)</p>
-            <%= f.label :tshirt_quantity, 'Select total number of t-shirts ($20 each)', class: 'item-description' %>
-            <span class="quantity"><%= f.number_field :tshirt_quantity, id: 'tshirt-quantity', min: 0, step: 1, value: @tshirt_quantity %></span>
-          </div>
-          <div class="form-group d-none" id="tshirt-note">
-            <%= f.label :tshirt_note, 'Specify color and style for each shirt', class: 'item-description' %>
-            <%= f.text_area :tshirt_note, maxlength: 255, rows: 3 %>
+          <p class="small"><a href="/tshirts" target=_blank>Click here for t-shirt style & size guide</a> (opens in new tab)</p>
+          <ul id="tshirt-cart-block" class="list-group">
+            <br><p id="tshirts-in-cart-label" class="small d-none"><strong>T-shirts in cart:</strong></p>
+          </ul>
+          <br>
+          <p id="add-tshirt-label" class="small"><strong>Add t-shirt:</strong></p>
+          <div id="tshirt-select-group" class="alert alert-warning">
+            <div class="form-group panel panel-body panel-warning">
+              <%= select_tag "tshirt_style", options_for_select(["Women's Short Sleeve Fine Jersey Tee", "Unisex Short Sleeve Fine Jersey Tee", "Women's Long Sleeve Crew Tee", "Unisex Long Sleeve Tee"]), { include_blank: 'Select style', class: 'form-control', id: 'tshirt-style-select' } %><br>
+              <%= select_tag "tshirt_color", options_for_select(["Black", "Red", "Gray", "Brown"]), { include_blank: 'Select color', class: 'form-control d-none', id: 'tshirt-color-select' } %><br>
+              <p class="btn btn-sm btn-warning d-none" id="add-to-cart">Add to order</p>
+            </div>
           </div>
         </div>
       <% end %>

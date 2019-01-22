@@ -5,20 +5,22 @@
   <div class="row">
     <div class="col-md-12 thanks">
       <p>Your payment to PCDC for $<%= @order.total %> has been successfully processed.</p>
+      <hr>
       <% if @order.admission_quantity > 0 %>
-        <p>
-          Megaband admissions:<br>
-          <%= @order.admission_quantity %> x $<%= @order.admission_cost %> = $<%= @order.admission_quantity * @order.admission_cost %><br>
-          <strong>You will not receive a physical ticket; your name will be on a list at the door.</strong>
-        </p>
+        <p><strong>Megaband admissions:</strong></p>
+        <p><%= @order.admission_quantity %> x $<%= @order.admission_cost %> = $<%= @order.admission_quantity * @order.admission_cost %></p>
+        <p><strong>You will not receive a physical ticket; your name will be on a list at the door.</strong></p>
+        <hr>
       <% end %>
-      <% if @order.tshirt_quantity > 0 %>
-        <p>
-          Megaband t-shirts:<br>
-          <%= @order.tshirt_quantity %> x $<%= @order.tshirt_cost %> = $<%= @order.tshirt_quantity * @order.tshirt_cost %><br>
-          <%= @order.tshirt_note %><br>
-          <strong>T-shirts can be picked up at the dance.</strong>
-        </p>
+      <% if @order.tshirts.any? %>
+        <p><strong>Megaband t-shirts:</strong></p>
+        <ul>
+        <% @order.tshirts.each do |tshirt| %>
+          <li><%= tshirt.style %> | <%= tshirt.color %> | $<%= tshirt.cost %>
+        <% end %>
+        </ul>
+        <p><strong>T-shirts can be picked up at the dance.</strong></p>
+        <hr>
       <% end %>
       <p>
         Saturday, March 9, 2019<br>

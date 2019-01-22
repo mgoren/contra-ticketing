@@ -15,6 +15,8 @@ gem 'bootstrap'
 gem 'stripe'
 gem 'rest-client'
 gem 'resque'
+gem 'octicons'
+gem 'nested_form_fields'
 
 group :development, :test do
   gem 'pry'

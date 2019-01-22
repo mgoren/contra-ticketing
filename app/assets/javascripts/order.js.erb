@@ -1,3 +1,5 @@
+var tshirt_id_counter = 0;
+
 var pricePerAdmission = <%= Rails.configuration.order[:admission_cost] %>;
 if (pricePerAdmission === 0) {
   var sliding_scale = true;
@@ -5,9 +7,6 @@ if (pricePerAdmission === 0) {
   var sliding_scale_max = <%= Rails.configuration.order[:sliding_scale_max] %>;
 }
 var tshirts_available = <%= Rails.configuration.order[:tshirts_available] %>;
-if (tshirts_available) {
-  var pricePerTshirt = <%= Rails.configuration.order[:tshirt_cost] %>;
-}
 
 $(function() {
   if(sliding_scale) {
@@ -33,18 +32,48 @@ $(function() {
   });
 
   if(tshirts_available) {
-    $('#tshirt-quantity').bind('change click', function() {
-      normalizeInput($(this));
-      var quantity = parseInt($(this).val());
-      if (isNaN(quantity) || quantity <= 0) {
-        $(this).val("0");
-        $('#tshirt-note').addClass('d-none');
+    $('#tshirt-style-select').change(function() {
+      $('#add-to-cart').addClass('d-none');
+      var colorSelect = $('#tshirt-color-select');
+      if ($(this).val() === '') {
+        colorSelect.addClass('d-none');
+      } else if ($(this).val() === "Women's Short Sleeve Fine Jersey Tee") {
+        selectOptions(colorSelect, ['Black', 'Gray', 'Red']);
+        colorSelect.removeClass('d-none');
       } else {
-        $('#tshirt-note').removeClass('d-none');
+        selectOptions(colorSelect, ['Black', 'Brown', 'Gray', 'Red']);
+        colorSelect.removeClass('d-none');
       }
-      updateTotal();
+    });
+
+    $('#tshirt-color-select').change(function() {
+      if ($(this).val() === "") {
+        $('#add-to-cart').addClass('d-none');
+      } else {
+        $('#add-to-cart').removeClass('d-none');
+      }
     });
   }
+
+  $('#add-to-cart').click(function() {
+    var style = $('#tshirt-style-select').val();
+    var color = $('#tshirt-color-select').val().toLowerCase();
+    var cost = (style === "Women's Short Sleeve Fine Jersey Tee" || style === "Unisex Short Sleeve Fine Jersey Tee") ? 20 : 30;
+    $('#tshirt-style-select').val("");
+    $('#tshirt-color-select').val("");
+    $('#tshirt-color-select').addClass('d-none');
+    $('#add-to-cart').addClass('d-none');
+    $('#tshirt-cart-block').append("<div class='cart-item'></div>");
+    $('.cart-item').last().append("<li class='list-group-item'>" + style + " | " + color + " | $" + cost + "<svg class='octicon octicon-trashcan float-right' viewBox='0 0 12 16' version='1.1' width='12' height='16' aria-hidden='true'><path fill-rule='evenodd' d='M11 2H9c0-.55-.45-1-1-1H5c-.55 0-1 .45-1 1H2c-.55 0-1 .45-1 1v1c0 .55.45 1 1 1v9c0 .55.45 1 1 1h7c.55 0 1-.45 1-1V5c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-1 12H3V5h1v8h1V5h1v8h1V5h1v8h1V5h1v9zm1-10H2V3h9v1z'></path></svg></li>");
+    $('.cart-item').last().append('<fieldset class="nested_fields nested_order_tshirts"><input type="hidden" value="' + style + '" name="order[tshirts_attributes][' + tshirt_id_counter + '][style]" id="order_tshirts_attributes_' + tshirt_id_counter + '_style"></fieldset>');
+    $('.cart-item').last().append('<fieldset class="nested_fields nested_order_tshirts"><input type="hidden" value="' + color + '" name="order[tshirts_attributes][' + tshirt_id_counter + '][color]" id="order_tshirts_attributes_' + tshirt_id_counter + '_color"></fieldset>');
+    $('#tshirt-cart-block .octicon-trashcan').last().click(function() {
+      $(this).parents('.cart-item').remove();
+      updateTotal();
+    });
+    tshirt_id_counter += 1;
+    updateTotal();
+  });
 });
 
 var normalizeInput = function(selector) {
@@ -52,29 +81,55 @@ var normalizeInput = function(selector) {
 }
 
 var updateTotal = function() {
-  var pricePer = sliding_scale ? parseInt($('#admission-cost').val()) : pricePerAdmission;
-  var quantity = parseInt($('#admission-quantity').val());
-  var total = pricePer * quantity;
-  if (tshirts_available) {
-    var quantityTshirts = parseInt($('#tshirt-quantity').val());
-    total += pricePerTshirt * quantityTshirts;
-  }
-
+  var pricePerAdmission = sliding_scale ? parseInt($('#admission-cost').val()) : pricePerAdmission;
+  var quantityAdmission = parseInt($('#admission-quantity').val());
+  var tshirtQuantity = $('.cart-item').length;
+  var tshirtTotal = 0;
+  var shortSleeveQuantity = 0;
+  var longSleeveQuantity = 0;
+  $('.cart-item').each(function(item) {
+    var cost = parseInt($(this).children('li').text().split('$')[1])
+    tshirtTotal += cost;
+    if (cost === 20) {
+      shortSleeveQuantity += 1;
+    } else {
+      longSleeveQuantity += 1;
+    }
+  });
+  var total = pricePerAdmission * quantityAdmission + tshirtTotal;
   $('#total-price').text(total);
   $('#total-as-displayed').val(total);
-
-  if (quantity > 0) {
-    $('#total-admissions').text("Admissions: " + quantity + " at $" + pricePer + " each");
+  if (quantityAdmission > 0) {
+    $('#total-admissions').text("Admissions: " + quantityAdmission + " at $" + pricePerAdmission + " each");
   } else {
     $('#total-admissions').text("");
   }
-  if (tshirts_available && quantityTshirts > 0) {
-    $('#total-tshirts').text("T-shirts: " + quantityTshirts + " at $" + pricePerTshirt + " each");
+  $('#total-tshirts').empty();
+  if (tshirtTotal > 0) {
+    $('#tshirts-in-cart-label').removeClass('d-none');
+    $('#add-tshirt-label').text('Add another t-shirt');
+    if (shortSleeveQuantity > 0) {
+      $('#total-tshirts').append("T-shirts: " + shortSleeveQuantity + " short sleeve at $20 each");
+    }
+    if (longSleeveQuantity > 0 && shortSleeveQuantity > 0) {
+      $('#total-tshirts').append("; " + longSleeveQuantity + " long sleeve at $30 each");
+    } else if (longSleeveQuantity > 0) {
+      $('#total-tshirts').append("T-shirts: " + longSleeveQuantity + " long sleeve at $30 each");
+    }
   } else {
     $('#total-tshirts').text("");
+    $('#tshirts-in-cart-label').addClass('d-none');
+    $('#add-tshirt-label').text('Add t-shirt');
   }
 }
 
+var selectOptions = function(selectElement, optionsList) {
+  selectElement.children('option:not(:first)').remove();
+  optionsList.forEach(function(option) {
+    selectElement.append("<option value='" + option + "'>" + option + "</option>");
+  });
+}
+
 window.onload=window.onpageshow= function() {
-    updateTotal();
+  updateTotal();
 };

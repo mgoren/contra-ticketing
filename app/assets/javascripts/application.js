@@ -15,9 +15,5 @@
 //= require bootstrap
 //= require rails-ujs
 //= require activestorage
+//= require nested_form_fields
 //= require_tree .
-
-$(function() {
-  $('.continue').hide();
-  // $('.continue').toggleClass('d-none')
-});
