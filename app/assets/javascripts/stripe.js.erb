@@ -2,6 +2,9 @@ $(function() {
   if( $("section").hasClass('payment-form') ) {
     // Create a Stripe client
     var stripe_publishable_key = '<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>'
+    if (stripe_publishable_key.indexOf('test') != -1) {
+      alert('error: currently in test mode');
+    }
     var stripe = Stripe(stripe_publishable_key);
     var elements = stripe.elements();
 
