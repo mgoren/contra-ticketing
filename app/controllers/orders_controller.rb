@@ -12,6 +12,7 @@ class OrdersController < ApplicationController
     @order.tshirts.each do |tshirt|
       tshirt.cost = tshirt.style.include?('Long') ? 30 : 20
     end
+    @order.tshirt_quantity = @order.tshirts.length # length instead of count cuz not yet saved
     if @order.save
       render :create
     else

@@ -17,6 +17,7 @@ gem 'rest-client'
 gem 'resque'
 gem 'octicons'
 gem 'nested_form_fields'
+gem 'active_model_serializers'
 
 group :development, :test do
   gem 'pry'

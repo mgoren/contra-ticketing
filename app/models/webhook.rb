@@ -6,7 +6,7 @@ class Webhook
   end
 
   def self.send(attributes)
-    response = RestClient.post(attributes[:endpoint], attributes[:payload].to_json)
+    response = RestClient.post(attributes[:endpoint], attributes[:payload])
     raise response.to_s if response.code >= 400
     response
   end
