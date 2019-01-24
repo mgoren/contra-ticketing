@@ -11,6 +11,9 @@
         <p><%= @order.admission_quantity %> x $<%= @order.admission_cost %> = $<%= @order.admission_quantity * @order.admission_cost %></p>
         <p><strong>You will not receive a physical ticket; your name will be on a list at the door.</strong></p>
         <hr>
+      <% else %>
+        <p><strong>No admissions were purchased on this order; t-shirts only</strong></p>
+        <hr>
       <% end %>
       <% if @order.tshirts.any? %>
         <p><strong>Megaband t-shirts:</strong></p>
