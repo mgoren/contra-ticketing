@@ -33,6 +33,6 @@ class OrdersController < ApplicationController
 
 private
   def order_params
-    params.require(:order).permit(:name, :email, :phone, :total, :admission_cost, :admission_quantity, :stripe_token, :idempotency_key, tshirts_attributes: [:id, :style, :color])
+    params.require(:order).permit(:name, :email, :phone, :total, :admission_cost, :admission_quantity, :stripe_token, :idempotency_key, tshirts_attributes: [:id, :style, :color, :size])
   end
 end

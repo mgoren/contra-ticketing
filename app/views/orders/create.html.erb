@@ -19,7 +19,7 @@
         <p><strong>Megaband t-shirts:</strong></p>
         <ul>
         <% @order.tshirts.each do |tshirt| %>
-          <li><%= tshirt.style %> | <%= tshirt.color %> | $<%= tshirt.cost %>
+          <li><%= tshirt.style %> | <%= tshirt.color %> | <%= tshirt.size %> | $<%= tshirt.cost %>
         <% end %>
         </ul>
         <p><strong>T-shirts must be picked up at the dance.</strong></p>

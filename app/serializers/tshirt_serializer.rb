@@ -1,3 +1,3 @@
 class TshirtSerializer < ActiveModel::Serializer
-  attributes :style, :color, :cost
+  attributes :style, :color, :size, :cost
 end

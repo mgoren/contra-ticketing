@@ -35,19 +35,28 @@ $(function() {
     $('#tshirt-style-select').change(function() {
       $('#add-to-cart').addClass('d-none');
       var colorSelect = $('#tshirt-color-select');
+      var sizeSelect = $('#tshirt-size-select');
+      colorSelect.removeClass('d-none');
+      sizeSelect.removeClass('d-none');
       if ($(this).val() === '') {
         colorSelect.addClass('d-none');
+        sizeSelect.addClass('d-none');
       } else if ($(this).val() === "Women's Short Sleeve Fine Jersey Tee") {
         selectOptions(colorSelect, ['Black', 'Gray', 'Red']);
-        colorSelect.removeClass('d-none');
+        selectOptions(sizeSelect, ['xs', 'sm', 'md', 'lg', 'xl', '2x', '3x']);
+      } else if ($(this).val() === "Women's Long Sleeve Crew Tee") {
+        selectOptions(colorSelect, ['Black', 'Brown', 'Gray', 'Red']);
+        selectOptions(sizeSelect, ['sm', 'md', 'lg', 'xl', '2x']);
       } else {
         selectOptions(colorSelect, ['Black', 'Brown', 'Gray', 'Red']);
-        colorSelect.removeClass('d-none');
+        selectOptions(sizeSelect, ['xs', 'sm', 'md', 'lg', 'xl', '2x', '3x']);
       }
     });
 
-    $('#tshirt-color-select').change(function() {
-      if ($(this).val() === "") {
+    $('#tshirt-color-select, #tshirt-size-select').change(function() {
+      var colorSelect = $('#tshirt-color-select');
+      var sizeSelect = $('#tshirt-size-select');
+      if (colorSelect.val() === '' || sizeSelect.val() === '') {
         $('#add-to-cart').addClass('d-none');
       } else {
         $('#add-to-cart').removeClass('d-none');
@@ -58,15 +67,16 @@ $(function() {
   $('#add-to-cart').click(function() {
     var style = $('#tshirt-style-select').val();
     var color = $('#tshirt-color-select').val().toLowerCase();
+    var size = $('#tshirt-size-select').val();
     var cost = (style === "Women's Short Sleeve Fine Jersey Tee" || style === "Unisex Short Sleeve Fine Jersey Tee") ? 20 : 30;
-    $('#tshirt-style-select').val("");
-    $('#tshirt-color-select').val("");
-    $('#tshirt-color-select').addClass('d-none');
+    $('#tshirt-style-select, #tshirt-color-select, #tshirt-size-select').val("");
+    $('#tshirt-color-select, #tshirt-size-select').addClass('d-none');
     $('#add-to-cart').addClass('d-none');
     $('#tshirt-cart-block').append("<div class='cart-item'></div>");
-    $('.cart-item').last().append("<li class='list-group-item'>" + style + " | " + color + " | $" + cost + "<svg class='octicon octicon-trashcan float-right' viewBox='0 0 12 16' version='1.1' width='12' height='16' aria-hidden='true'><path fill-rule='evenodd' d='M11 2H9c0-.55-.45-1-1-1H5c-.55 0-1 .45-1 1H2c-.55 0-1 .45-1 1v1c0 .55.45 1 1 1v9c0 .55.45 1 1 1h7c.55 0 1-.45 1-1V5c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-1 12H3V5h1v8h1V5h1v8h1V5h1v8h1V5h1v9zm1-10H2V3h9v1z'></path></svg></li>");
+    $('.cart-item').last().append("<li class='list-group-item'>" + style + " | " + color + " | " + size + " | $" + cost + "<svg class='octicon octicon-trashcan float-right' viewBox='0 0 12 16' version='1.1' width='12' height='16' aria-hidden='true'><path fill-rule='evenodd' d='M11 2H9c0-.55-.45-1-1-1H5c-.55 0-1 .45-1 1H2c-.55 0-1 .45-1 1v1c0 .55.45 1 1 1v9c0 .55.45 1 1 1h7c.55 0 1-.45 1-1V5c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-1 12H3V5h1v8h1V5h1v8h1V5h1v8h1V5h1v9zm1-10H2V3h9v1z'></path></svg></li>");
     $('.cart-item').last().append('<fieldset class="nested_fields nested_order_tshirts"><input type="hidden" value="' + style + '" name="order[tshirts_attributes][' + tshirt_id_counter + '][style]" id="order_tshirts_attributes_' + tshirt_id_counter + '_style"></fieldset>');
     $('.cart-item').last().append('<fieldset class="nested_fields nested_order_tshirts"><input type="hidden" value="' + color + '" name="order[tshirts_attributes][' + tshirt_id_counter + '][color]" id="order_tshirts_attributes_' + tshirt_id_counter + '_color"></fieldset>');
+    $('.cart-item').last().append('<fieldset class="nested_fields nested_order_tshirts"><input type="hidden" value="' + size + '" name="order[tshirts_attributes][' + tshirt_id_counter + '][size]" id="order_tshirts_attributes_' + tshirt_id_counter + '_size"></fieldset>');
     $('#tshirt-cart-block .octicon-trashcan').last().click(function() {
       $(this).parents('.cart-item').remove();
       updateTotal();
