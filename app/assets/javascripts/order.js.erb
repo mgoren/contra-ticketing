@@ -9,6 +9,11 @@ if (pricePerAdmission === 0) {
 var tshirts_available = <%= Rails.configuration.order[:tshirts_available] %>;
 
 $(function() {
+  $('#show-tshirts-btn').click(function() {
+    $(this).hide();
+    $('#tshirt-select-group').removeClass('d-none');
+  });
+
   if(sliding_scale) {
     $('#admission-cost').bind('change click', function() {
       normalizeInput($(this));

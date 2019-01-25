@@ -67,13 +67,14 @@
         <hr>
         <div class="item">
           <p class="item-name">T-shirts</p>
-          <p class="small"><a href="/tshirts" target=_blank>Click here for t-shirt style & size guide</a> (opens in new tab)</p>
+          <p class="small"><a href="/tshirts" target=_blank>Click here for t-shirt style & size guide</a> (opens in new tab)</p><br>
+          <div id='show-tshirts-btn' class='btn btn-sm btn-primary'>Click here to add t-shirts to your order</div>
           <ul id="tshirt-cart-block" class="list-group">
             <br><p id="tshirts-in-cart-label" class="small d-none"><strong>T-shirts in cart:</strong></p>
           </ul>
           <br>
-          <p id="add-tshirt-label" class="small"><strong>Add t-shirt:</strong></p>
-          <div id="tshirt-select-group" class="alert alert-warning">
+          <div id="tshirt-select-group" class="alert alert-warning d-none">
+            <p class="small"><strong>Add t-shirt:</strong></p><br>
             <div class="form-group panel panel-body panel-warning">
               <%= select_tag "tshirt_style", options_for_select(["Women's Short Sleeve Fine Jersey Tee", "Unisex Short Sleeve Fine Jersey Tee", "Women's Long Sleeve Crew Tee", "Unisex Long Sleeve Tee"]), { include_blank: 'Select style', class: 'form-control', id: 'tshirt-style-select' } %><br>
               <%= select_tag "tshirt_color", options_for_select(["Black", "Red", "Gray", "Brown"]), { include_blank: 'Select color', class: 'form-control d-none', id: 'tshirt-color-select' } %><br>
