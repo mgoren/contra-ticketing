@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
 
   def new
+    redirect_to unavailable_path
     @idempotency_key = SecureRandom.uuid
     @order = Order.new
     @admission_cost = 25
