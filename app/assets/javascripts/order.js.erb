@@ -30,8 +30,8 @@ $(function() {
   $('#admission-quantity').bind('change click', function() {
     normalizeInput($(this));
     var quantity = parseInt($(this).val());
-    if (isNaN(quantity) || quantity < 0) {
-      $(this).val("0");
+    if (isNaN(quantity) || quantity < 1) {
+      $(this).val("1");
     }
     updateTotal();
   });

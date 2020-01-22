@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
 
   def new
-    redirect_to unavailable_path
+    # redirect_to unavailable_path
     @idempotency_key = SecureRandom.uuid
     @order = Order.new
     @admission_cost = 25
@@ -26,10 +26,6 @@ class OrdersController < ApplicationController
         render :new
       end
     end
-  end
-
-  def update
-    binding.pry
   end
 
 private
