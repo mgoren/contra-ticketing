@@ -1,9 +1,6 @@
 <section class="payment-form dark">
   <div class="block-heading">
-    <h2>
-      megaband 2020 cancelled<br>
-    </h2>
-    <p>If you wish to donate to PCDC to help cover the costs, please use the form below to do so.</p>
+    <h2>Portland Megaband 2023</h2>
   </div>
   <%= form_for @order do |f| %>
     <%= render '/layouts/errors', object: @order %>
@@ -39,11 +36,11 @@
         <p class="item-name"><%= Rails.configuration.order[:short_name] %> Admissions</p>
         <% if Rails.configuration.order[:admission_cost] == 0 %>
           <div class="form-group" id="admission-cost-group">
-            <%= f.label :admission_cost, 'How much are you able to pay per admission? ($10-25)', class: 'item-description' %>
+            <%= f.label :admission_cost, "How much are you able to pay per admission? ($#{Rails.configuration.order[:sliding_scale_min]}-#{Rails.configuration.order[:sliding_scale_max]})", class: 'item-description' %>
             <span class="quantity">
               <div class="input-group-prepend">
                 <span class="input-group-text">$</span>
-                <%= f.number_field :admission_cost, id: 'admission-cost', min: 10, max: 25, step: 1, value: @admission_cost %>
+                <%= f.number_field :admission_cost, id: 'admission-cost', min: Rails.configuration.order[:sliding_scale_min], max: Rails.configuration.order[:sliding_scale_max], step: 1, value: @admission_cost %>
               </div>
             </span>
           </div>

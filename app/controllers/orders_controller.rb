@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
     # redirect_to unavailable_path
     @idempotency_key = SecureRandom.uuid
     @order = Order.new
-    @admission_cost = 25
+    @admission_cost = 30
     @admission_quantity = 1
   end
 
