@@ -31,50 +31,24 @@
     </div>
 
     <div class="products">
-      <h3 class="title"><%= Rails.configuration.order[:tshirts_available] ? 'Select admissions and/or t-shirts:' : 'Select admissions:' %></h3>
+      <h3 class="title">Select admissions:</h3>
       <div class="item">
         <p class="item-name"><%= Rails.configuration.order[:short_name] %> Admissions</p>
         <% if Rails.configuration.order[:admission_cost] == 0 %>
-          <div class="form-group" id="admission-cost-group">
-            <%= f.label :admission_cost, "How much are you able to pay per admission? ($#{Rails.configuration.order[:sliding_scale_min]}-#{Rails.configuration.order[:sliding_scale_max]})", class: 'item-description' %>
-            <span class="quantity">
-              <div class="input-group-prepend">
-                <span class="input-group-text">$</span>
-                <%= f.number_field :admission_cost, id: 'admission-cost', min: Rails.configuration.order[:sliding_scale_min], max: Rails.configuration.order[:sliding_scale_max], step: 1, value: @admission_cost %>
-              </div>
-            </span>
+          <div class="form-group">
+            <%= f.label :admission_cost, "How much are you able to pay per admission? ($#{Rails.configuration.order[:sliding_scale_min]}-#{Rails.configuration.order[:sliding_scale_max]})" %>
+            <span class="input-group-text">$</span>
+            <%= f.number_field :admission_cost, id: 'admission-cost', min: Rails.configuration.order[:sliding_scale_min], max: Rails.configuration.order[:sliding_scale_max], step: 1, value: @admission_cost %>
           </div>
         <% end %>
-        <div class="form-group" id="admission-quantity-group">
-          <%= f.label :admission_quantity, 'Select admissions quantity', class: 'item-description' %>
-          <span class="quantity"><%= f.number_field :admission_quantity, id: 'admission-quantity', min: 0, step: 1, value: @admission_quantity %></span>
+        <div class="form-group">
+          <%= f.label :admission_quantity, 'Select admissions quantity' %>
+          <%= f.number_field :admission_quantity, id: 'admission-quantity', min: 0, step: 1, value: @admission_quantity %>
         </div>
       </div>
-      <% if Rails.configuration.order[:tshirts_available] %>
-        <hr>
-        <div class="item">
-          <p class="item-name">T-shirts</p>
-          <p class="small"><a href="/tshirts" target=_blank>Click here for t-shirt style & size guide</a> (opens in new tab)</p><br>
-          <div id='show-tshirts-btn' class='btn btn-sm btn-primary'>Click here to add t-shirts to your order</div>
-          <ul id="tshirt-cart-block" class="list-group">
-            <br><p id="tshirts-in-cart-label" class="small d-none"><strong>T-shirts in cart:</strong></p>
-          </ul>
-          <br>
-          <div id="tshirt-select-group" class="alert alert-warning d-none">
-            <p class="small"><strong>Add t-shirt:</strong></p><br>
-            <div class="form-group panel panel-body panel-warning">
-              <%= select_tag "tshirt_style", options_for_select(["Women's Short Sleeve Fine Jersey Tee", "Unisex Short Sleeve Fine Jersey Tee", "Women's Long Sleeve Crew Tee", "Unisex Long Sleeve Tee"]), { include_blank: 'Select style', class: 'form-control', id: 'tshirt-style-select' } %><br>
-              <%= select_tag "tshirt_color", options_for_select(["Black", "Red", "Gray", "Brown"]), { include_blank: 'Select color', class: 'form-control d-none', id: 'tshirt-color-select' } %><br>
-              <%= select_tag "tshirt_size", options_for_select(["xs", "sm", "md", "lg", "xl", "2x", "3x"]), { include_blank: 'Select size', class: 'form-control d-none', id: 'tshirt-size-select' } %><br>
-              <p class="btn btn-sm btn-warning d-none" id="add-to-cart">Add to order</p>
-            </div>
-          </div>
-        </div>
-      <% end %>
       <div class="total">
         <p>Total $<span id="total-price"></span></p>
         <p class="small" id="total-admissions"></p>
-        <p class="small" id="total-tshirts"></p>
       </div>
     </div>
 

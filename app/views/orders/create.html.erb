@@ -6,39 +6,21 @@
     <div class="col-md-12 thanks">
       <p>Your payment to PCDC for $<%= @order.total %> has been successfully processed.</p>
       <hr>
-      <% if @order.admission_quantity > 0 %>
-        <p><strong>Megaband admissions:</strong></p>
-        <p><%= @order.admission_quantity %> x $<%= @order.admission_cost %> = $<%= @order.admission_quantity * @order.admission_cost %></p>
-        <p><strong>You will not receive a physical ticket; your name will be on a list at the door.</strong></p>
-        <hr>
-      <% else %>
-        <p><strong>No admissions were purchased on this order; t-shirts only</strong></p>
-        <hr>
-      <% end %>
-      <% if @order.tshirts.any? %>
-        <p><strong>Megaband t-shirts:</strong></p>
-        <ul>
-        <% @order.tshirts.each do |tshirt| %>
-          <li><%= tshirt.style %> | <%= tshirt.color %> | <%= tshirt.size %> | $<%= tshirt.cost %>
-        <% end %>
-        </ul>
-        <p><strong>T-shirts must be picked up at the dance.</strong></p>
-        <hr>
-      <% end %>
+      <p><strong>Megaband admissions:</strong></p>
+      <p><%= @order.admission_quantity %> x $<%= @order.admission_cost %> = $<%= @order.admission_quantity * @order.admission_cost %></p>
+      <p><strong>You will not receive a physical ticket; your name will be on a list at the door.</strong></p>
+      <hr>
       <p>
-        <strong><font color='red'>Please note the earlier time this year!</font></strong><br>
-        Saturday, March 14, 2020<br>
-        <strong><font color='red'>6:45 lesson | 7:15-10:30 dance</font></strong><br>
-        PSU Smith Memorial Center Ballroom, 3rd Floor<br>
-        1825 SW Broadway, Portland, Oregon
+        Saturday, March 11, 2020<br>
+        6:45 lesson | 7:15-10:30 dance<br>
+        Oaks Park...<br>
+        ADDRESS HERE
       </p>
-      <p>Paid parking is available in the parking structure across Broadway from the building.</p>
-      <p><font color='red'>Dancers will need to enter through the Broadway street entrance this year.</font></p>
+      <p>PARKING INFO</p>
       <p>
         A receipt has been sent to <%= @order.email %>.<br>
         Please email <a href="mailto:contra@portlandcountrydance.org">contra@portlandcountrydance.org</a> if you have any questions.
       </p>
-      <p><a href="http://www.cascadepromenade.org/dance/2019/12/22/Cascade-Promenade-2020.html">Check out other Cascade Promenade dances!</a></p>
     </div>
   </div>
 </section>

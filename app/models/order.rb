@@ -1,6 +1,4 @@
 class Order < ApplicationRecord
-  has_many :tshirts
-
   before_validation :merge_config_values
   validates :name, :email, :phone, :admission_quantity, presence: true
   validates :name, :email, :phone, length: { maximum: 255 }
@@ -12,8 +10,6 @@ class Order < ApplicationRecord
   after_create :add_to_spreadsheet
 
   attr_accessor :stripe_token, :idempotency_key
-
-  accepts_nested_attributes_for :tshirts
 
 private
 
@@ -29,7 +25,6 @@ private
 
   def validate_total
     back_end_total = admission_quantity * admission_cost
-    tshirts.each { |tshirt| back_end_total += tshirt.cost }
     if total != back_end_total
       errors.add(:custom, "Error calculating total. Your card was not charged.")
     end

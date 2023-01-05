@@ -6,5 +6,4 @@ Rails.configuration.order = {
   admission_cost: 0, # required: number or 0 for sliding scale
   sliding_scale_min: 15, # optional: number or delete line if not sliding scale
   sliding_scale_max: 30, # optional: number or delete line if not sliding scale
-  tshirts_available: false, # required: true or false
 }
