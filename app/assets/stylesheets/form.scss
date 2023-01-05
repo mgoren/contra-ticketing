@@ -5,6 +5,11 @@
 .payment-form {
 	padding-bottom: 50px;
 
+  .row {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
+
   .content {
   	box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
   	background-color: white;
@@ -70,32 +75,14 @@
   	font-size: 0.9em;
   }
 
-  .products .item-description {
-  	font-size:0.8em;
-  	opacity:0.6;
+  #admission-cost {
+    padding-left: .5rem;
+    width: 4rem;
   }
 
-  .products .item p {
-  	margin-bottom:0.2em;
-  }
-
-  .products .quantity {
-  	float: right;
-  	font-weight: 600;
-  	font-size: 0.9em;
-  }
-
-  .quantity input {
-    width: 4em;
-    padding-left: .4em;
-  }
-
-  textarea {
-    width: 100%;
-  }
-
-  .admission-name {
-    float: right;
+  #admission-quantity {
+    width: 4rem;
+    padding-left: .5rem;
   }
 
   .products .total{
@@ -126,21 +113,13 @@
 
   .date-separator{
    	margin-left: 10px;
-      margin-right: 10px;
-      margin-top: 5px;
-  }
-
-  #admission-cost {
-    margin-left: -5px;
+    margin-right: 10px;
+    margin-top: 5px;
   }
 
   .form-row {
     padding: 20px;
   }
-}
-
-.octicon-trashcan {
-	cursor: pointer;
 }
 
 .StripeElement {
@@ -165,7 +144,16 @@
   background-color: #fefde5 !important;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 596px) {
+  .admissions-container {
+    display: grid;
+    grid-template-columns: 81% 19%;
+  }
+
+  #admission-quantity {
+    float: right;
+  }
+
 	.payment-form {
     .title {
   		font-size: 1.2em;
@@ -191,14 +179,4 @@
     	margin-top: 2em;
     }
   }
-}
-
-@media (max-width: 575px) {
-	#admission-cost-group {
-		padding-top: 1em;
-	}
-
-	#admission-quantity-group {
-		padding-top: 4em;
-	}
 }

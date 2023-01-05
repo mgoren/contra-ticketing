@@ -34,17 +34,17 @@
       <h3 class="title">Select admissions:</h3>
       <div class="item">
         <p class="item-name"><%= Rails.configuration.order[:short_name] %> Admissions</p>
-        <% if Rails.configuration.order[:admission_cost] == 0 %>
-          <div class="form-group">
-            <%= f.label :admission_cost, "How much are you able to pay per admission? ($#{Rails.configuration.order[:sliding_scale_min]}-#{Rails.configuration.order[:sliding_scale_max]})" %>
-            <span class="input-group-text">$</span>
-            <%= f.number_field :admission_cost, id: 'admission-cost', min: Rails.configuration.order[:sliding_scale_min], max: Rails.configuration.order[:sliding_scale_max], step: 1, value: @admission_cost %>
+          <div class='admissions-container'>
+            <div><%= f.label :admission_cost, "How much are you able to pay per admission? ($#{Rails.configuration.order[:sliding_scale_min]}-#{Rails.configuration.order[:sliding_scale_max]})" %></div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+              </div>
+              <%= f.number_field :admission_cost, id: 'admission-cost', min: Rails.configuration.order[:sliding_scale_min], max: Rails.configuration.order[:sliding_scale_max], step: 1, value: @admission_cost %>
+            </div>
+            <div><%= f.label :admission_quantity, 'Select admissions quantity' %></div>
+            <div><%= f.number_field :admission_quantity, id: 'admission-quantity', min: 0, step: 1, value: @admission_quantity %></div>
           </div>
-        <% end %>
-        <div class="form-group">
-          <%= f.label :admission_quantity, 'Select admissions quantity' %>
-          <%= f.number_field :admission_quantity, id: 'admission-quantity', min: 0, step: 1, value: @admission_quantity %>
-        </div>
       </div>
       <div class="total">
         <p>Total $<span id="total-price"></span></p>
