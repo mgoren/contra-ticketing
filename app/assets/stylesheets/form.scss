@@ -59,6 +59,10 @@
   	padding-bottom: 8px;
   }
 
+  #info {
+    background-color: lightcyan;
+  }
+
   .products {
   	background-color: #f7fbff;
       padding: 25px;
@@ -83,6 +87,13 @@
   #admission-quantity {
     width: 4rem;
     padding-left: .5rem;
+  }
+
+  #note {
+    display: none;
+    #order_note {
+      margin-top: .5rem;
+    }
   }
 
   .products .total{
@@ -142,6 +153,12 @@
 
 .StripeElement--webkit-autofill {
   background-color: #fefde5 !important;
+}
+
+@media (min-width: 576px) {
+  #order_note {
+    width: 155%;
+  }
 }
 
 @media (min-width: 596px) {

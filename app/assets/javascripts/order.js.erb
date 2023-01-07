@@ -24,8 +24,19 @@ $(function() {
     var quantity = parseInt($(this).val());
     if (isNaN(quantity) || quantity < 1) {
       $(this).val("1");
+    } else if (quantity > 9) {
+      $(this).val("9");
     }
     updateTotal();
+  });
+
+  $('#admission-quantity').bind('keyup change click', function() {
+    var quantity = parseInt($(this).val());
+     if (!isNaN(quantity) && quantity > 1) {
+      $('#note').show();
+    } else {
+      $('#note').hide();
+    }
   });
 });
 

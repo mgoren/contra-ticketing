@@ -8,6 +8,11 @@
     <%= f.hidden_field :idempotency_key, value: @idempotency_key %>
     <%= f.hidden_field :total, id: 'total-as-displayed' %>
 
+    <div class="details" id="info">
+      <p>The dance will take place on Saturday, March 11 at 7:30 pm (doors at 7). It will take place at the Oaks Park Dance Pavilion, 7805 SE Oaks Park Way in Portland. Parking is free. Cost is a sliding scale from $15-30 per person.</p>
+      <p><strong>Covid policy:</strong> Everyone must be vaccinated, including at least one booster if eligible. A well-fitted mask covering nose and mouth is required for attendees. PCDC's full Covid policy is available <a href="https://pcdc.fun/covid19" target=_blank>here</a>.</p>
+    </div>
+
     <div class="details">
       <h3 class="title">Name and contact info:</h3>
       <div class="row">
@@ -46,6 +51,16 @@
             <div><%= f.number_field :admission_quantity, id: 'admission-quantity', min: 0, step: 1, value: @admission_quantity %></div>
           </div>
       </div>
+
+      <div id="note">
+        <div class="row">
+          <div class="form-group col-sm-8">
+            <%= f.label :note, 'Please list names of additional attendee(s)' %>
+            <%= f.text_area :note, class: 'form-control' %>
+          </div>
+        </div>
+      </div>
+
       <div class="total">
         <p>Total $<span id="total-price"></span></p>
         <p class="small" id="total-admissions"></p>

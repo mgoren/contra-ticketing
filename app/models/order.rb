@@ -56,8 +56,4 @@ private
   def add_to_spreadsheet
     WebhookSpreadsheet.new(self)
   end
-
-  def send_receipt
-    Email.new(self)
-  end
 end

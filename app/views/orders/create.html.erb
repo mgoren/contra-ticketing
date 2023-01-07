@@ -1,26 +1,32 @@
-<section class="thanks">
-  <div class="block-heading">
-    <h2>Thanks <%= @order.name %>!</h2>
-  </div>
-  <div class="row">
-    <div class="col-md-12 thanks">
-      <p>Your payment to PCDC for $<%= @order.total %> has been successfully processed.</p>
-      <hr>
-      <p><strong>Megaband admissions:</strong></p>
-      <p><%= @order.admission_quantity %> x $<%= @order.admission_cost %> = $<%= @order.admission_quantity * @order.admission_cost %></p>
-      <p><strong>You will not receive a physical ticket; your name will be on a list at the door.</strong></p>
-      <hr>
-      <p>
-        Saturday, March 11, 2020<br>
-        6:45 lesson | 7:15-10:30 dance<br>
-        Oaks Park...<br>
-        ADDRESS HERE
-      </p>
-      <p>PARKING INFO</p>
-      <p>
-        A receipt has been sent to <%= @order.email %>.<br>
-        Please email <a href="mailto:contra@portlandcountrydance.org">contra@portlandcountrydance.org</a> if you have any questions.
-      </p>
+<div class="container">
+  <section class="thanks">
+    <div class="block-heading">
+      <h2>Thanks <%= @order.name %>!</h2>
     </div>
-  </div>
-</section>
+    <div class="row">
+      <div class="col-md-12 thanks">
+        <p>Your payment to PCDC for $<%= @order.total %> has been successfully processed.</p>
+        <hr>
+        <p><strong>Megaband admissions:</strong></p>
+        <p><%= @order.admission_quantity %> x $<%= @order.admission_cost %> = $<%= @order.admission_quantity * @order.admission_cost %></p>
+        <p><strong>You will not receive a physical ticket; your name will be on a list at the door.</strong></p>
+        <hr>
+        <p>
+          Saturday, March 11, 2023<br>
+          7:30pm (doors at 7)<br>
+          Oaks Park Dance Pavilion<br>
+          7805 SE Oaks Park Way in Portland
+        </p>
+        <p>Parking is free.</p>
+        <p>If you have not already done so, please also fill out the <a href="https://pcdc.fun/contact-trace" target=_blank>PCDC Contact Tracing form</a>.</p>
+        <p>Additionally, you can expedite the sign-in process by printing and filling out the <a href="https://pcdc.fun/files/PCDC_Events_Waiver.pdf" target=_blank>PCDC event waiver</a> in advance, if you have not already done so.</p>
+        <p>
+          A receipt containing this information has been sent to <%= @order.email %>.<br>
+          Please email <a href="mailto:contra@portlandcountrydance.org">contra@portlandcountrydance.org</a> if you have any questions.
+        </p>
+        <hr>
+        <p><strong>Covid policy:</strong> Everyone must be vaccinated, including at least one booster if eligible. A well-fitted mask covering nose and mouth is required for attendees. PCDC's full Covid policy is available <a href="https://pcdc.fun/covid19" target=_blank>here</a>.</p>
+      </div>
+    </div>
+  </section>
+</div>
